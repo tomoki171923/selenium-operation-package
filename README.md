@@ -11,15 +11,19 @@ pip install git+https://github.com/tomoki171923/selenium-operation-package#egg=s
 ## Usage
 
 ```python
-from selenpack import SeleniumOperation
+from selenpack.selenium_operation import SeleniumOperation
 
 if __name__ == "__main__":
     selenium = SeleniumOperation()
-    selenium.toPage("https://www.google.com/")
-    selenium.setScreenshot(base_file_name="example")
+    # visit Google.com
+    selenium.goPage("https://www.google.com/")
+    # take a screenshot
+    selenium.setScreenshot(folder="./", base_file_name="example")
     selenium.takeScreenshot()
+    # Google search
     el = selenium.setTextboxByName(name="q", value="weather japan")
     el.submit()
+    # take a screenshot
     selenium.takeScreenshot()
     del selenium
 ```
