@@ -71,8 +71,8 @@ class SeleniumOperation:
         else:
             self.screenshot_base_name = base_file_name
 
-    # go to the specified url page
-    def toPage(self, url: str) -> None:
+    # go to the specified url.
+    def goPage(self, url: str) -> None:
         self.driver.get(url)
         WebDriverWait(self.driver, self.wait_time).until(
             ExpectedConditions.presence_of_all_elements_located
@@ -135,7 +135,6 @@ class SeleniumOperation:
         while os.path.isfile(filepath):
             index += 1
             filepath = base_filepath + f"-{str(index).zfill(3)}.png"
-        print(filepath)
         return filepath
 
     # ******************************************
