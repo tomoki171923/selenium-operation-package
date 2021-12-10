@@ -159,6 +159,10 @@ class SeleniumOperation:
     def clickByClass(self, classname: str) -> None:
         self.findElementByClass(classname).click()
 
+    # find & click the element by tag. (It is the first element found.)
+    def clickByTag(self, tagname: str) -> None:
+        self.findElementByTag(tagname).click()
+
     # ******************************************
     # scroll functions
     # ******************************************
@@ -190,6 +194,12 @@ class SeleniumOperation:
         self.scroll(element)
         return element
 
+    # scroll to the element by tag. (It is the first element found.)
+    def scrollByTag(self, tagname: str) -> WebElement:
+        element: WebElement = self.findElementByTag(tagname)
+        self.scroll(element)
+        return element
+
     # ******************************************
     # set value functions
     # ******************************************
@@ -208,6 +218,12 @@ class SeleniumOperation:
     # set the value on the textbox by class. (It is the first element found.)
     def setTextboxByClass(self, classname: str, value: str) -> WebElement:
         element: WebElement = self.findElementByClass(classname)
+        element.send_keys(value)
+        return element
+
+    # set the value on the textbox by tag. (It is the first element found.)
+    def setTextboxByTag(self, tagname: str, value: str) -> WebElement:
+        element: WebElement = self.findElementByTag(tagname)
         element.send_keys(value)
         return element
 
@@ -268,3 +284,7 @@ class SeleniumOperation:
     # find an element by class. (It is the first element found.)
     def findElementByClass(self, classname: str) -> WebElement:
         return self.driver.find_element(By.CLASS_NAME, classname)
+
+    # find an element by tag. (It is the first element found.)
+    def findElementByTag(self, tagname: str) -> WebElement:
+        return self.driver.find_element(By.TAG_NAME, tagname)
