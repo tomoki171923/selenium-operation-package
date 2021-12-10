@@ -24,9 +24,10 @@ if __name__ == "__main__":
     del selenium
 ```
 
-## Environment
+## Set Up Environment
 
-need Selenium Server (Grid / Standalone) or Local web driver to execute selenpack.
+needs Selenium Server (Grid / Standalone) or Local web driver to execute selenpack.
 
 reference the following.
+
 <https://github.com/tomoki171923/docker-selenium-python>
