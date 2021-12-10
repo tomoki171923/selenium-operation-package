@@ -9,7 +9,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.remote.webelement import WebElement
 from PIL import ImageGrab
 import os
@@ -45,7 +44,7 @@ class SeleniumOperation:
         if remote_driver is True:
             self.driver = webdriver.Remote(
                 command_executor=os.environ["SELENIUM_URL"],
-                desired_capabilities=DesiredCapabilities.CHROME.copy(),
+                options=webdriver.ChromeOptions(),
             )
         else:
             path: str
@@ -71,8 +70,8 @@ class SeleniumOperation:
         else:
             self.screenshot_base_name = base_file_name
 
-    # go to the specified url page
-    def toPage(self, url: str) -> None:
+    # go to the specified url.
+    def goPage(self, url: str) -> None:
         self.driver.get(url)
         WebDriverWait(self.driver, self.wait_time).until(
             ExpectedConditions.presence_of_all_elements_located
@@ -135,7 +134,6 @@ class SeleniumOperation:
         while os.path.isfile(filepath):
             index += 1
             filepath = base_filepath + f"-{str(index).zfill(3)}.png"
-        print(filepath)
         return filepath
 
     # ******************************************
@@ -257,16 +255,16 @@ class SeleniumOperation:
     # ******************************************
     # find an element by id.
     def findElementById(self, id: str) -> WebElement:
-        return self.driver.find_element_by_id(id)
+        return self.driver.find_element(By.ID, id)
 
     # find an element by name. (It is the first element found.)
     def findElementByName(self, name: str) -> WebElement:
-        return self.driver.find_element_by_name(name)
+        return self.driver.find_element(By.NAME, name)
 
     # find an element by link text. (It is the first element found.)
     def findElementByText(self, text: str) -> WebElement:
-        return self.driver.find_element_by_partial_link_text(text)
+        return self.driver.find_element(By.PARTIAL_LINK_TEXT, text)
 
     # find an element by class. (It is the first element found.)
     def findElementByClass(self, classname: str) -> WebElement:
-        return self.driver.find_element_by_class_name(classname)
+        return self.driver.find_element(By.CLASS_NAME, classname)
