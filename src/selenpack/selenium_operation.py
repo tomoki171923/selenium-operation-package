@@ -49,17 +49,14 @@ class SeleniumOperation:
             )
         else:
             # local webdrier
-            executable_path: str
             if "CHROME_DRIVER_PATH" in os.environ:
-                executable_path = os.environ["CHROME_DRIVER_PATH"]
+                executable_path: str = os.environ["CHROME_DRIVER_PATH"]
+                self.driver = webdriver.Chrome(
+                    options=chrome_options, executable_path=executable_path
+                )
             else:
-                if "macOS" in platform.platform():
-                    executable_path = "/usr/local/bin/chromedriver"
-                elif "Windows" in platform.platform():
-                    executable_path = "C:\\programs\\chromedriver"
-            self.driver = webdriver.Chrome(
-                options=chrome_options, executable_path=executable_path
-            )
+                self.driver = webdriver.Chrome(options=chrome_options)
+
         # for wait loading
         self.driver.implicitly_wait(self.wait_time)
         # for wait javascript function
