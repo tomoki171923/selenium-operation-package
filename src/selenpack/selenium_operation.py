@@ -42,17 +42,21 @@ class SeleniumOperation:
         if headless is True:
             chrome_options.add_argument("--headless")
         if remote_driver is True:
+            # remote webdrier
             self.driver = webdriver.Remote(
                 command_executor=os.environ["SELENIUM_URL"],
                 options=webdriver.ChromeOptions(),
             )
         else:
-            path: str
-            if "macOS" in platform.platform():
-                path = "/usr/local/bin/chromedriver"
-            elif "Windows" in platform.platform():
-                path = "C:\\programs\\chromedriver"
-            self.driver = webdriver.Chrome(options=chrome_options, executable_path=path)
+            # local webdrier
+            if "CHROME_DRIVER_PATH" in os.environ:
+                executable_path: str = os.environ["CHROME_DRIVER_PATH"]
+                self.driver = webdriver.Chrome(
+                    options=chrome_options, executable_path=executable_path
+                )
+            else:
+                self.driver = webdriver.Chrome(options=chrome_options)
+
         # for wait loading
         self.driver.implicitly_wait(self.wait_time)
         # for wait javascript function
