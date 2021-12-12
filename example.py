@@ -1,4 +1,4 @@
-from src.selenium_operation import SeleniumOperation
+from src.selenpack.selenium_operation import SeleniumOperation
 
 
 if __name__ == "__main__":
