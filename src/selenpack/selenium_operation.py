@@ -84,6 +84,9 @@ class SeleniumOperation:
     def trimStr(self, string: str) -> str:
         return string.lstrip().rstrip()
 
+    # ******************************************
+    # wait functions
+    # ******************************************
     # waiting until display specific element
     def waitDisplayElementByClass(self, class_name: str) -> None:
         wait = WebDriverWait(self.driver, self.wait_time)
@@ -287,6 +290,14 @@ class SeleniumOperation:
     # ******************************************
     # get functions
     # ******************************************
+    # get the current url.
+    def getUrl(self) -> str:
+        return self.driver.current_url
+
+    # get the title on the current page.
+    def getTitle(self) -> str:
+        return self.driver.title
+
     # get options on the selectbox by id.
     def getSelectboxOptionsById(self, id: str) -> tuple[Select, list]:
         select: Select = Select(self.findElementById(id))
@@ -328,6 +339,22 @@ class SeleniumOperation:
     def findElementByTag(self, tagname: str) -> WebElement:
         return self.driver.find_element(By.TAG_NAME, tagname)
 
+    # find elements by name.
+    def findElementsByName(self, name: str) -> list(WebElement):
+        return self.driver.find_elements(By.NAME, name)
+
+    # find elements by link text.
+    def findElementsByText(self, text: str) -> list(WebElement):
+        return self.driver.find_elements(By.PARTIAL_LINK_TEXT, text)
+
+    # find elements by class.
+    def findElementsByClass(self, classname: str) -> list(WebElement):
+        return self.driver.find_elements(By.CLASS_NAME, classname)
+
+    # find elements by tag.
+    def findElementsByTag(self, tagname: str) -> list(WebElement):
+        return self.driver.find_elements(By.TAG_NAME, tagname)
+
     # ******************************************
     # submit functions
     # ******************************************
@@ -338,3 +365,9 @@ class SeleniumOperation:
     # submit form by name. (It is the first element found.)
     def submitFormByName(self, name: str) -> WebElement:
         self.findElementByName(name).click()
+
+    # ******************************************
+    # action functions
+    # ******************************************
+    def refreshPage(self) -> None:
+        self.driver.refresh()
