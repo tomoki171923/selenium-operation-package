@@ -14,7 +14,6 @@ from PIL import ImageGrab
 import os
 from datetime import date
 import time
-import platform
 
 
 class SeleniumOperation:
@@ -232,21 +231,57 @@ class SeleniumOperation:
         return element
 
     # set the value on the selectbox by id.
-    def setSelectboxById(self, id: str, value: str) -> Select:
+    def setSelectboxValueById(self, id: str, value: str) -> Select:
         select: Select = Select(self.findElementById(id))
-        select.select_by_visible_text(value)
+        select.select_by_value(value)
         return select
 
     # set the value on the selectbox by name. (It is the first element found.)
-    def setSelectboxByName(self, name: str, value: str) -> Select:
+    def setSelectboxValueByName(self, name: str, value: str) -> Select:
         select: Select = Select(self.findElementByName(name))
-        select.select_by_visible_text(value)
+        select.select_by_value(value)
         return select
 
     # set the value on the selectbox by class. (It is the first element found.)
-    def setSelectboxByClass(self, classname: str, value: str) -> Select:
+    def setSelectboxValueByClass(self, classname: str, value: str) -> Select:
         select: Select = Select(self.findElementByClass(classname))
-        select.select_by_visible_text(value)
+        select.select_by_value(value)
+        return select
+
+    # set the text on the selectbox by id.
+    def setSelectboxTextById(self, id: str, text: str) -> Select:
+        select: Select = Select(self.findElementById(id))
+        select.select_by_visible_text(text)
+        return select
+
+    # set the text on the selectbox by name. (It is the first element found.)
+    def setSelectboxTextByName(self, name: str, text: str) -> Select:
+        select: Select = Select(self.findElementByName(name))
+        select.select_by_visible_text(text)
+        return select
+
+    # set the text on the selectbox by class. (It is the first element found.)
+    def setSelectboxTextByClass(self, classname: str, text: str) -> Select:
+        select: Select = Select(self.findElementByClass(classname))
+        select.select_by_visible_text(text)
+        return select
+
+    # set the index on the selectbox by id.
+    def setSelectboxIndexById(self, id: str, index: int) -> Select:
+        select: Select = Select(self.findElementById(id))
+        select.select_by_visible_index(index)
+        return select
+
+    # set the index on the selectbox by name. (It is the first element found.)
+    def setSelectboxIndexByName(self, name: str, index: int) -> Select:
+        select: Select = Select(self.findElementByName(name))
+        select.select_by_visible_index(index)
+        return select
+
+    # set the index on the selectbox by class. (It is the first element found.)
+    def setSelectboxIndexByClass(self, classname: str, index: int) -> Select:
+        select: Select = Select(self.findElementByClass(classname))
+        select.select_by_visible_index(index)
         return select
 
     # ******************************************
@@ -292,3 +327,14 @@ class SeleniumOperation:
     # find an element by tag. (It is the first element found.)
     def findElementByTag(self, tagname: str) -> WebElement:
         return self.driver.find_element(By.TAG_NAME, tagname)
+
+    # ******************************************
+    # submit functions
+    # ******************************************
+    # submit form by id.
+    def submitFormById(self, id: str) -> WebElement:
+        self.findElementById(id).submit()
+
+    # submit form by name. (It is the first element found.)
+    def submitFormByName(self, name: str) -> WebElement:
+        self.findElementByName(name).click()
