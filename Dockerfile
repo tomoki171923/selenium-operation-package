@@ -5,7 +5,7 @@ ENV LANG=C.UTF-8
 
 WORKDIR /usr/src/app
 
-COPY Pipfile ./
+COPY Pipfile* ./
 
 RUN apt-get update \
     && apt-get -y install locales git \
