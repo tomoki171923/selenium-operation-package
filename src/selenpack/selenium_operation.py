@@ -369,5 +369,10 @@ class SeleniumOperation:
     # ******************************************
     # action functions
     # ******************************************
+    # refresh the current page.
     def refreshPage(self) -> None:
         self.driver.refresh()
+
+    # back one step page in the browser history.
+    def backPage(self) -> None:
+        self.driver.back()
